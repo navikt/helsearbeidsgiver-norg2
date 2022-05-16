@@ -33,7 +33,7 @@ repositories {
     mavenCentral()
     maven {
         credentials {
-            username = githubUsername
+            username = "x-access-token"
             password = githubPassword
         }
         setUrl("https://maven.pkg.github.com/navikt/helsearbeidsgiver-tokenprovider")
