@@ -4,12 +4,13 @@ val ktor_version: String by project
 val kotlin_version: String by project
 val logback_version: String by project
 val mockk_version: String by project
+val githubUsername: String by project
 val githubPassword: String by project
 
 plugins {
     kotlin("jvm") version "1.6.21"
     kotlin("plugin.serialization") version "1.6.21"
-    id("org.jmailen.kotlinter") version "3.10.0"
+    // id("org.jmailen.kotlinter") version "3.10.0"
     id("maven-publish")
 }
 
@@ -17,7 +18,7 @@ group = "no.nav.helsearbeidsgiver"
 version = "0.1.2"
 
 tasks.withType<KotlinCompile> {
-    kotlinOptions.jvmTarget = "17"
+    kotlinOptions.jvmTarget = "11"
 }
 
 
@@ -32,7 +33,7 @@ repositories {
     mavenCentral()
     maven {
         credentials {
-            username = "x-access-token"
+            username = githubUsername
             password = githubPassword
         }
         setUrl("https://maven.pkg.github.com/navikt/helsearbeidsgiver-tokenprovider")

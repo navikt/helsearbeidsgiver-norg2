@@ -5,8 +5,7 @@ import io.ktor.http.*
 fun buildClient(status: HttpStatusCode, content: String): Norg2Client {
     return Norg2Client(
         "",
-        "",
+        MockAccessTokenProvider(),
         mockHttpClient(status, content)
     )
 }
-

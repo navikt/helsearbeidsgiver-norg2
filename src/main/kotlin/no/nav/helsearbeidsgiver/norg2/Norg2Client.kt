@@ -21,7 +21,7 @@ import no.nav.helsearbeidsgiver.tokenprovider.AccessTokenProvider
  */
 open class Norg2Client(
     private val url: String,
-    private val stsClient: AccessTokenProvider,
+    private val accessTokenProvider: AccessTokenProvider,
     private val httpClient: HttpClient
 ) {
 
@@ -29,7 +29,7 @@ open class Norg2Client(
      * Oppslag av informasjon om ruting av arbeidsoppgaver til enheter.
      */
     open suspend fun hentAlleArbeidsfordelinger(request: ArbeidsfordelingRequest, callId: String?): List<ArbeidsfordelingResponse> {
-        val stsToken = stsClient.getToken()
+        val stsToken = accessTokenProvider.getToken()
         return runBlocking {
             httpClient.post<List<ArbeidsfordelingResponse>>(url + "/arbeidsfordeling/enheter/bestmatch") {
                 contentType(ContentType.Application.Json.withCharset(Charsets.UTF_8))
@@ -40,5 +40,3 @@ open class Norg2Client(
         }
     }
 }
-
-
