@@ -10,7 +10,7 @@ val githubPassword: String by project
 plugins {
     kotlin("jvm") version "1.6.21"
     kotlin("plugin.serialization") version "1.6.21"
-    // id("org.jmailen.kotlinter") version "3.10.0"
+    id("org.jmailen.kotlinter") version "3.10.0"
     id("maven-publish")
 }
 
