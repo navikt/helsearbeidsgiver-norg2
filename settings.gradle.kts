@@ -1,1 +1,1 @@
-rootProject.name = "norg2"
+rootProject.name = "norg2-client"
