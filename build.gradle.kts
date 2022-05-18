@@ -62,6 +62,6 @@ dependencies {
     testImplementation("io.ktor:ktor-client-mock:$ktor_version")
     implementation("com.nimbusds:nimbus-jose-jwt:9.22")
     implementation("no.nav.security:token-client-core:2.0.15")
-    implementation("no.nav.helsearbeidsgiver:tokenprovider:0.1.2")
+    implementation("no.nav.helsearbeidsgiver:helsearbeidsgiver-tokenprovider:0.1.2")
     testImplementation("io.mockk:mockk:$mockk_version")
 }
