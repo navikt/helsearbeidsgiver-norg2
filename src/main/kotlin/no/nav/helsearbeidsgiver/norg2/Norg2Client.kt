@@ -18,7 +18,7 @@ import no.nav.helsearbeidsgiver.tokenprovider.AccessTokenProvider
  * https://norg2.dev.adeo.no/norg2/swagger-ui.html#/arbeidsfordeling/findArbeidsfordelingByCriteriaUsingPOST
  *
  */
-open class Norg2Client(
+class Norg2Client(
     private val url: String,
     private val accessTokenProvider: AccessTokenProvider,
     private val httpClient: HttpClient
@@ -27,7 +27,7 @@ open class Norg2Client(
     /**
      * Oppslag av informasjon om ruting av arbeidsoppgaver til enheter.
      */
-    open suspend fun hentAlleArbeidsfordelinger(request: ArbeidsfordelingRequest, callId: String?): List<ArbeidsfordelingResponse> {
+    suspend fun hentAlleArbeidsfordelinger(request: ArbeidsfordelingRequest, callId: String?): List<ArbeidsfordelingResponse> {
         val stsToken = accessTokenProvider.getToken()
         return httpClient.post(url + "/arbeidsfordeling/enheter/bestmatch") {
             contentType(ContentType.Application.Json.withCharset(Charsets.UTF_8))
