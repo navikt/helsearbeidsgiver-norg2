@@ -32,7 +32,7 @@ repositories {
             username = System.getenv("GITHUB_ACTOR") ?: "x-access-token"
             password = System.getenv("GITHUB_TOKEN") ?: githubPassword
         }
-        setUrl("https://maven.pkg.github.com/navikt/helsearbeidsgiver-tokenprovider")
+        setUrl("https://maven.pkg.github.com/navikt/*")
     }
 }
 
