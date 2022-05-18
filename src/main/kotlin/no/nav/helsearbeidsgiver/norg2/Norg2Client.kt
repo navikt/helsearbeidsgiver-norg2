@@ -6,7 +6,6 @@ import io.ktor.client.request.post
 import io.ktor.http.ContentType
 import io.ktor.http.contentType
 import io.ktor.http.withCharset
-import kotlinx.coroutines.runBlocking
 import no.nav.helsearbeidsgiver.tokenprovider.AccessTokenProvider
 
 /**
@@ -30,13 +29,11 @@ open class Norg2Client(
      */
     open suspend fun hentAlleArbeidsfordelinger(request: ArbeidsfordelingRequest, callId: String?): List<ArbeidsfordelingResponse> {
         val stsToken = accessTokenProvider.getToken()
-        return runBlocking {
-            httpClient.post<List<ArbeidsfordelingResponse>>(url + "/arbeidsfordeling/enheter/bestmatch") {
-                contentType(ContentType.Application.Json.withCharset(Charsets.UTF_8))
-                header("Authorization", "Bearer $stsToken")
-                header("X-Correlation-ID", callId)
-                body = request
-            }
+        return httpClient.post(url + "/arbeidsfordeling/enheter/bestmatch") {
+            contentType(ContentType.Application.Json.withCharset(Charsets.UTF_8))
+            header("Authorization", "Bearer $stsToken")
+            header("X-Correlation-ID", callId)
+            body = request
         }
     }
 }

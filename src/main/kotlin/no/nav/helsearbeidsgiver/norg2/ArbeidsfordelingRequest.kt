@@ -1,6 +1,8 @@
 package no.nav.helsearbeidsgiver.norg2
 
-@kotlinx.serialization.Serializable
+import kotlinx.serialization.Serializable
+
+@Serializable
 data class ArbeidsfordelingRequest(
     var behandlingstema: String? = null,
     var behandlingstype: String? = null,

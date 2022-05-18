@@ -1,24 +1,21 @@
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-
 val ktorVersion: String by project
 val kotlinVersion: String by project
 val logbackVersion: String by project
 val mockkVersion: String by project
+val nimbusJoseJwtVersion: String by project
+val helsearbeidsgiverTokenproviderVersion: String by project
+
 val githubPassword: String by project
 
 plugins {
     kotlin("jvm")
     kotlin("plugin.serialization")
-    id("org.jmailen.kotlinter") version "3.10.0"
+    id("org.jmailen.kotlinter")
     id("maven-publish")
 }
 
 group = "no.nav.helsearbeidsgiver"
-version = "0.1.2"
-
-tasks.withType<KotlinCompile> {
-    kotlinOptions.jvmTarget = "11"
-}
+version = "0.1.3"
 
 tasks {
     test {
@@ -55,12 +52,12 @@ publishing {
 }
 
 dependencies {
-    testImplementation(kotlin("test"))
     implementation("io.ktor:ktor-client-core:$ktorVersion")
     implementation("io.ktor:ktor-client-json:$ktorVersion")
     implementation("io.ktor:ktor-client-serialization:$ktorVersion")
+    implementation("com.nimbusds:nimbus-jose-jwt:$nimbusJoseJwtVersion")
+    implementation("no.nav.helsearbeidsgiver:helsearbeidsgiver-tokenprovider:$helsearbeidsgiverTokenproviderVersion")
+
+    testImplementation(kotlin("test"))
     testImplementation("io.ktor:ktor-client-mock:$ktorVersion")
-    implementation("com.nimbusds:nimbus-jose-jwt:9.+")
-    implementation("no.nav.helsearbeidsgiver:helsearbeidsgiver-tokenprovider:0.+")
-    testImplementation("io.mockk:mockk:$mockkVersion")
 }
