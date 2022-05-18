@@ -1,4 +1,4 @@
-rootProject.name = "norg2-client"
+rootProject.name = "helsearbeidsgiver-norg2-client"
 
 pluginManagement {
     val kotlinVersion: String by settings
