@@ -62,3 +62,9 @@ dependencies {
     testImplementation(kotlin("test"))
     testImplementation("io.ktor:ktor-client-mock:$ktorVersion")
 }
+
+tasks.withType<KotlinCompile> {
+    kotlinOptions {
+        freeCompilerArgs += "-opt-in=kotlin.RequiresOptIn"
+    }
+}
