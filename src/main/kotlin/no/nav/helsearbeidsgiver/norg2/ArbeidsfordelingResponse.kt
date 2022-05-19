@@ -5,14 +5,14 @@ import java.time.LocalDate
 
 @Serializable
 data class ArbeidsfordelingResponse(
-    @Serializable(with = DateAsLongSerializer::class)
+    @Serializable(with = LocalDateSerializer::class)
     val aktiveringsdato: LocalDate?,
     val antallRessurser: Int?,
     val enhetId: Int,
     val enhetNr: String? = null,
     val kanalstrategi: String?,
     val navn: String,
-    @Serializable(with = DateAsLongSerializer::class)
+    @Serializable(with = LocalDateSerializer::class)
     val nedleggelsesdato: LocalDate?,
     val oppgavebehandler: Boolean?,
     val orgNivaa: String?,
@@ -21,9 +21,9 @@ data class ArbeidsfordelingResponse(
     val sosialeTjenester: String?,
     val status: String?,
     val type: String?,
-    @Serializable(with = DateAsLongSerializer::class)
+    @Serializable(with = LocalDateSerializer::class)
     val underAvviklingDato: LocalDate?,
-    @Serializable(with = DateAsLongSerializer::class)
+    @Serializable(with = LocalDateSerializer::class)
     val underEtableringDato: LocalDate?,
     val versjon: Int?
 )
