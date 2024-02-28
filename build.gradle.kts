@@ -49,7 +49,7 @@ publishing {
         maven {
             url = uri("https://maven.pkg.github.com/navikt/helsearbeidsgiver-${rootProject.name}")
             credentials {
-                username =  "x-access-token"
+                username = "x-access-token"
                 password = githubPassword
             }
         }
