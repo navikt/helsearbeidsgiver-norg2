@@ -30,7 +30,7 @@ class Norg2Client(
     private val url: String,
     private val httpClient: HttpClient,
     private val getAccessToken: () -> String,
-): INorg2Client, INorg2ClientSync {
+) : INorg2Client, INorg2ClientSync {
 
     /**
      * Oppslag av informasjon om ruting av arbeidsoppgaver til enheter.
@@ -45,8 +45,7 @@ class Norg2Client(
         }
     }
 
-    override fun hentAlleArbeidsfordelingerSync(request: ArbeidsfordelingRequest, callId: String?) : List<ArbeidsfordelingResponse> {
+    override fun hentAlleArbeidsfordelingerSync(request: ArbeidsfordelingRequest, callId: String?): List<ArbeidsfordelingResponse> {
         return runBlocking { hentAlleArbeidsfordelinger(request, callId) }
     }
-
 }
