@@ -28,7 +28,6 @@ fun buildClient(
 
     return Norg2Client(
         "",
-        MockAccessTokenProvider(),
         HttpClient(mockEngine) {
             install(JsonFeature) {
                 serializer = KotlinxSerializer(
@@ -39,5 +38,5 @@ fun buildClient(
                 )
             }
         }
-    )
+    ) { "token" }
 }
