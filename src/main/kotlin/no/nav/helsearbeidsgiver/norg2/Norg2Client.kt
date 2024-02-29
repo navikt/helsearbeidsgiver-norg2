@@ -6,7 +6,15 @@ import io.ktor.client.request.post
 import io.ktor.http.ContentType
 import io.ktor.http.contentType
 import io.ktor.http.withCharset
-import no.nav.helsearbeidsgiver.tokenprovider.AccessTokenProvider
+import kotlinx.coroutines.runBlocking
+
+interface INorg2Client {
+    suspend fun hentAlleArbeidsfordelinger(request: ArbeidsfordelingRequest, callId: String?): List<ArbeidsfordelingResponse>
+}
+
+interface INorg2ClientSync {
+    fun hentAlleArbeidsfordelingerSync(request: ArbeidsfordelingRequest, callId: String?): List<ArbeidsfordelingResponse>
+}
 
 /**
  * Klient som henter alle arbeidsfordelinger
@@ -20,20 +28,24 @@ import no.nav.helsearbeidsgiver.tokenprovider.AccessTokenProvider
  */
 class Norg2Client(
     private val url: String,
-    private val accessTokenProvider: AccessTokenProvider,
-    private val httpClient: HttpClient
-) {
+    private val httpClient: HttpClient,
+    private val getAccessToken: () -> String,
+) : INorg2Client, INorg2ClientSync {
 
     /**
      * Oppslag av informasjon om ruting av arbeidsoppgaver til enheter.
      */
-    suspend fun hentAlleArbeidsfordelinger(request: ArbeidsfordelingRequest, callId: String?): List<ArbeidsfordelingResponse> {
-        val stsToken = accessTokenProvider.getToken()
+    override suspend fun hentAlleArbeidsfordelinger(request: ArbeidsfordelingRequest, callId: String?): List<ArbeidsfordelingResponse> {
+        val accessToken = getAccessToken()
         return httpClient.post(url + "/arbeidsfordeling/enheter/bestmatch") {
             contentType(ContentType.Application.Json.withCharset(Charsets.UTF_8))
-            header("Authorization", "Bearer $stsToken")
+            header("Authorization", "Bearer $accessToken")
             header("X-Correlation-ID", callId)
             body = request
         }
+    }
+
+    override fun hentAlleArbeidsfordelingerSync(request: ArbeidsfordelingRequest, callId: String?): List<ArbeidsfordelingResponse> {
+        return runBlocking { hentAlleArbeidsfordelinger(request, callId) }
     }
 }
