@@ -38,5 +38,5 @@ fun buildClient(
                 )
             }
         }
-    ) { "token" }
+    )
 }
